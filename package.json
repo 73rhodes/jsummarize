@@ -1,0 +1,22 @@
+{
+  "name": "jsummarize",
+  "version": "1.0.0",
+  "description": "Generate information about JSON documents.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha -G",
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --ui bdd -R spec -t 5000",
+    "report": "npm run coverage && open coverage/lcov-report/index.html"
+  },
+  "author": "Darren DeRidder",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "filewatcher": "^3.0.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "plato": "^1.7.0"
+  }
+}

@@ -1,0 +1,23 @@
+[
+    {
+        "wibble": ["wibble", "wobble", "wubble"],
+        "wobble": ["buzz", "foo", "bar"],
+        "wubble": {
+            "foo": "bar",
+            "qux": "doo"
+        }
+    },
+    {
+        "wibble": {
+            "foo": "bar",
+            "qux": "doo"
+        },
+        "wobble": 1,
+        "wubble": 2
+    },
+    {
+        "wibble": true,
+        "wobble": true,
+        "wubble": true
+    }
+]
