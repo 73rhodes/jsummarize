@@ -1,5 +1,4 @@
-TBD
-`jsonsummary.js` is an ECMAScript library to generate meta-data for JSON files.
+`jsummarize` is an ECMAScript library to generate meta-data for JSON files.
 
 * ✅  Generates meta-data about JSON documents.
 * ✅  Outputs JSON format.
