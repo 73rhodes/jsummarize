@@ -1,16 +1,18 @@
 {
   "name": "jsummarize",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Generate information about JSON documents.",
+  "author": "Darren DeRidder",
+  "repository": "https://github.com/73rhodes/jsummarize",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha -G",
     "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --ui bdd -R spec -t 5000",
     "report": "npm run coverage && open coverage/lcov-report/index.html"
   },
-  "author": "Darren DeRidder",
   "license": "MIT",
   "dependencies": {
+    "hll-native": "^1.0.2"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",

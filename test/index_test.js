@@ -8,7 +8,6 @@ var analyzeObject = jstats.analyzeObject;
 var analyzeArray  = jstats.analyzeArray;
 describe("jsonsummary", function () {
 
-  /* */
   describe("#analyzeObject", function () {
 
     it("should throw error without correct number of args", function () {
@@ -172,6 +171,27 @@ describe("jsonsummary", function () {
       expect(foo.types.Object.count).to.be(2);
       expect(foo.types.Object.properties.displayText.count).to.be(2);
     });
+
+    it('should generate uniqueness of 1 for unique values', function () {
+      var arr = [
+        {foo: 1},
+        {foo: 2},
+        {foo: 3}
+      ];
+      var stats = analyzeArray({}, arr);
+      var fooStats = stats.elementTypes.Object.properties.foo;
+      expect(fooStats.types.Number.uniqueness).to.be(1);
+    });
+
+    it('should generate uniqueness < 1 for non-unique values', function () {
+      var arr = [
+        {foo: 1},
+        {foo: 1},
+        {foo: 2}
+      ];
+      var stats = analyzeArray({}, arr);
+      var fooStats = stats.elementTypes.Object.properties.foo;
+      expect(fooStats.types.Number.uniqueness).to.be.below(1);
+    })
   });
-  /* */
 });
