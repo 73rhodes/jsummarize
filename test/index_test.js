@@ -172,7 +172,7 @@ describe("jsonsummary", function () {
       expect(foo.types.Object.properties.displayText.count).to.be(2);
     });
 
-    it('should generate uniqueness of 1 for unique values', function () {
+    it('should have correct hll count', function () {
       var arr = [
         {foo: 1},
         {foo: 2},
@@ -180,18 +180,15 @@ describe("jsonsummary", function () {
       ];
       var stats = analyzeArray({}, arr);
       var fooStats = stats.elementTypes.Object.properties.foo;
-      expect(fooStats.types.Number.uniqueness).to.be(1);
-    });
-
-    it('should generate uniqueness < 1 for non-unique values', function () {
-      var arr = [
+      expect(fooStats.types.Number.HLL.count()).to.be(3);
+      var arr2 = [
         {foo: 1},
         {foo: 1},
         {foo: 2}
       ];
-      var stats = analyzeArray({}, arr);
-      var fooStats = stats.elementTypes.Object.properties.foo;
-      expect(fooStats.types.Number.uniqueness).to.be.below(1);
+      stats = analyzeArray({}, arr2);
+      fooStats = stats.elementTypes.Object.properties.foo;
+      expect(fooStats.types.Number.HLL.count()).to.be(2);
     })
   });
 });
