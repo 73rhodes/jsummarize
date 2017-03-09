@@ -1,6 +1,6 @@
 {
   "name": "jsummarize",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generate information about JSON documents.",
   "author": "Darren DeRidder",
   "repository": "https://github.com/73rhodes/jsummarize",
@@ -19,6 +19,7 @@
     "filewatcher": "^3.0.1",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
+    "ndjson": "^1.5.0",
     "plato": "^1.7.0"
   }
 }
