@@ -53,7 +53,7 @@ describe("jsonsummary", function () {
       var stats = summarizeObject({}, obj);
       var arrayStats = stats.properties.foo.types.Array;
       expect(arrayStats.count).to.be(1);
-      expect(arrayStats.elements.types.String.count).to.be(3);
+      expect(arrayStats.types.String.count).to.be(3);
     });
   });
 
@@ -102,7 +102,6 @@ describe("jsonsummary", function () {
     });
 
     it('should analyze an array of objects', function () {
-      debugger;
       var array1 = [
         {foo: 1, bar: true,  fizz: "buzz"},
         {foo: 2, bar: true,  fizz: "fizz"},
@@ -124,10 +123,10 @@ describe("jsonsummary", function () {
         expect(stats.minimumElements).to.be(3);
         expect(stats.maximumElements).to.be(3);
         expect(stats.types.Array.count).to.be(1);
-        expect(stats.types.Array.elements).to.not.be.empty();
-        expect(stats.types.Array.elements.types.Boolean.count).to.be(1);
-        expect(stats.types.Array.elements.types.String.count).to.be(1);
-        expect(stats.types.Array.elements.types.Number.count).to.be(1);
+        expect(stats.types.Array).to.not.be.empty();
+        expect(stats.types.Array.types.Boolean.count).to.be(1);
+        expect(stats.types.Array.types.String.count).to.be(1);
+        expect(stats.types.Array.types.Number.count).to.be(1);
     });
 
     it('should analyze nested arrays and objects', function () {
@@ -140,12 +139,12 @@ describe("jsonsummary", function () {
       expect(objData.count).to.be(2);
       var fizz = objData.properties.fizz.types.Array;
       expect(fizz.count).to.be(2);
-      expect(fizz.elements.minimumElements).to.be(2);
-      expect(fizz.elements.maximumElements).to.be(3);
-      expect(fizz.elements.types.Number.count).to.be(4);
-      expect(fizz.elements.types.Object.count).to.be(1);
+      expect(fizz.minimumElements).to.be(2);
+      expect(fizz.maximumElements).to.be(3);
+      expect(fizz.types.Number.count).to.be(4);
+      expect(fizz.types.Object.count).to.be(1);
       // ridiculous nesting...
-      var doo = fizz.elements.types.Object.properties.doo;
+      var doo = fizz.types.Object.properties.doo;
       expect(doo.types.Array.count).to.be(1);
     });
 
@@ -189,6 +188,6 @@ describe("jsonsummary", function () {
       stats = summarizeArray({}, arr2);
       fooStats = stats.types.Object.properties.foo;
       expect(fooStats.types.Number.HLL.count()).to.be(2);
-    })
+    });
   });
 });
