@@ -8,9 +8,10 @@ exports.demo = function demo() {
     var jsonData;
     try {
       jsonData = JSON.parse(data);
+      console.log(jsonData);
     } catch (e) {
       console.log("Try to parse ndjson");
     }
-    var stats = summarize({}, data);
+    var stats = summarize({}, jsonData);
     fs.writeFileSync(__dirname + "/output.json", JSON.stringify(stats, null, 2));
 };

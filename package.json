@@ -1,6 +1,6 @@
 {
   "name": "jsummarize",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Generate information about JSON documents.",
   "author": "Darren DeRidder",
   "repository": "https://github.com/73rhodes/jsummarize",

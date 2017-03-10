@@ -53,7 +53,7 @@ describe("jsonsummary", function () {
       var stats = summarizeObject({}, obj);
       var arrayStats = stats.properties.foo.types.Array;
       expect(arrayStats.count).to.be(1);
-      expect(arrayStats.elements.elementTypes.String.count).to.be(3);
+      expect(arrayStats.elements.types.String.count).to.be(3);
     });
   });
 
@@ -85,9 +85,9 @@ describe("jsonsummary", function () {
         var array3 = [{"foo": "bar"}, {"foo": "FOO", "fizz": "buzz"}];
         stats = summarizeArray(stats, array1);
         stats = summarizeArray(stats, array2);
-        expect(stats.elementTypes).to.not.be.empty();
-        expect(stats.elementTypes.Number.count).to.be(3);
-        expect(stats.elementTypes.String.count).to.be(4);
+        expect(stats.types).to.not.be.empty();
+        expect(stats.types.Number.count).to.be(3);
+        expect(stats.types.String.count).to.be(4);
         stats = summarizeArray(stats, array3);
     });
 
@@ -98,7 +98,7 @@ describe("jsonsummary", function () {
         {foo: 2, bar: null}
       ];
       var stats = summarizeArray({}, array1);
-      expect(stats.elementTypes.null.count).to.be(1);
+      expect(stats.types.null.count).to.be(1);
     });
 
     it('should analyze an array of objects', function () {
@@ -113,8 +113,8 @@ describe("jsonsummary", function () {
       var newstats = summarizeArray(stats, array1);
       expect(newstats.minimumElements).to.be(4);
       expect(newstats.maximumElements).to.be(4);
-      expect(newstats.elementTypes.Object.count).to.be(4);
-      expect(newstats.elementTypes.Object.properties.foo.count).to.be(4);
+      expect(newstats.types.Object.count).to.be(4);
+      expect(newstats.types.Object.properties.foo.count).to.be(4);
     });
 
     it('should analyze an array of arrays', function () {
@@ -123,11 +123,11 @@ describe("jsonsummary", function () {
         stats = summarizeArray(stats, array1);
         expect(stats.minimumElements).to.be(3);
         expect(stats.maximumElements).to.be(3);
-        expect(stats.elementTypes.Array.count).to.be(1);
-        expect(stats.elementTypes.Array.elements).to.not.be.empty();
-        expect(stats.elementTypes.Array.elements.elementTypes.Boolean.count).to.be(1);
-        expect(stats.elementTypes.Array.elements.elementTypes.String.count).to.be(1);
-        expect(stats.elementTypes.Array.elements.elementTypes.Number.count).to.be(1);
+        expect(stats.types.Array.count).to.be(1);
+        expect(stats.types.Array.elements).to.not.be.empty();
+        expect(stats.types.Array.elements.types.Boolean.count).to.be(1);
+        expect(stats.types.Array.elements.types.String.count).to.be(1);
+        expect(stats.types.Array.elements.types.Number.count).to.be(1);
     });
 
     it('should analyze nested arrays and objects', function () {
@@ -136,16 +136,16 @@ describe("jsonsummary", function () {
         {fizz: [1, 2]}
       ];
       var newStats = summarizeArray({}, array1);
-      var objData = newStats.elementTypes.Object;
+      var objData = newStats.types.Object;
       expect(objData.count).to.be(2);
       var fizz = objData.properties.fizz.types.Array;
       expect(fizz.count).to.be(2);
       expect(fizz.elements.minimumElements).to.be(2);
       expect(fizz.elements.maximumElements).to.be(3);
-      expect(fizz.elements.elementTypes.Number.count).to.be(4);
-      expect(fizz.elements.elementTypes.Object.count).to.be(1);
+      expect(fizz.elements.types.Number.count).to.be(4);
+      expect(fizz.elements.types.Object.count).to.be(1);
       // ridiculous nesting...
-      var doo = fizz.elements.elementTypes.Object.properties.doo;
+      var doo = fizz.elements.types.Object.properties.doo;
       expect(doo.types.Array.count).to.be(1);
     });
 
@@ -165,8 +165,8 @@ describe("jsonsummary", function () {
         }
       ];
       var stats = summarizeArray({}, arr);
-      expect(stats.elementTypes.Object.count).to.be(2);
-      var foo = stats.elementTypes.Object.properties.foo;
+      expect(stats.types.Object.count).to.be(2);
+      var foo = stats.types.Object.properties.foo;
       expect(foo.count).to.be(2);
       expect(foo.types.Object.count).to.be(2);
       expect(foo.types.Object.properties.displayText.count).to.be(2);
@@ -179,7 +179,7 @@ describe("jsonsummary", function () {
         {foo: 3}
       ];
       var stats = summarizeArray({}, arr);
-      var fooStats = stats.elementTypes.Object.properties.foo;
+      var fooStats = stats.types.Object.properties.foo;
       expect(fooStats.types.Number.HLL.count()).to.be(3);
       var arr2 = [
         {foo: 1},
@@ -187,7 +187,7 @@ describe("jsonsummary", function () {
         {foo: 2}
       ];
       stats = summarizeArray({}, arr2);
-      fooStats = stats.elementTypes.Object.properties.foo;
+      fooStats = stats.types.Object.properties.foo;
       expect(fooStats.types.Number.HLL.count()).to.be(2);
     })
   });
